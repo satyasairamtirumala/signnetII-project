@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dataset Upload | XAI Admin</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Upload Datasets for Connected Vehicle Security Analysis" name="keywords">
+    <meta content="Admin page to upload new datasets (CSV) for machine learning model training." name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> 
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+    <style>
+        /* --- GRACEFUL ELEGANCE STYLES (ADOPTED FOR UPLOAD PAGE) --- */
+
+        /* COLOR PALETTE - Light Base + Deep Navy & Burgundy/Gold Accents */
+        :root {
+            --primary: #9B1C31; /* Rich Burgundy/Maroon Accent */
+            --secondary-dark: #0F1D36; /* Deep Navy/Ink Base */
+            --gold-accent: #B8860B; /* Subtle Gold/Dark Copper for luxury */
+            --light-base: #FFFFFF; /* Pure White elements */
+            --off-white-bg: #FAFAFA; /* Lightest Gray/Off-White Background */
+            --shadow: rgba(155, 28, 49, 0.2); 
+            --dark-card-bg: #1B2C45; /* Slightly lighter navy for contrast area */
+        }
+
+        /* BASE & TYPOGRAPHY */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #555555; 
+            background-color: var(--off-white-bg); 
+            letter-spacing: 0.01em; 
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif; 
+            font-weight: 700;
+            color: var(--secondary-dark); 
+        }
+
+        /* NAVBAR - Deep Navy */
+        .navbar {
+            background-color: var(--secondary-dark) !important; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        .navbar-brand h1 {
+            color: var(--light-base) !important; 
+            font-size: 1.4rem !important; 
+            font-weight: 900 !important;
+            padding-left: 20px;
+        }
+        .navbar-brand h1 i {
+            color: var(--gold-accent); 
+            font-size: 1.2em; 
+        }
+        .nav-link {
+            color: #DDDDDD !important; 
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-item .nav-link.active {
+            color: var(--primary) !important; 
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 5px !important;
+        }
+        .nav-link.split-line {
+            line-height: 1.2;
+            text-align: center;
+            padding-top: 14px !important;
+            padding-bottom: 12px !important;
+        }
+
+        /* CTA BUTTONS (Logout/Upload) */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--light-base) !important; 
+            box-shadow: 0 4px 15px var(--shadow); 
+            border-radius: 8px !important; 
+            padding: 16px 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7A1727; 
+            border-color: #7A1727;
+        }
+        
+        /* CONTENT STYLING */
+        .container-xxl.py-5 {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+        }
+        
+        /* Left Column Content */
+        .content-zone h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary); 
+            font-weight: 900;
+        }
+        .content-zone p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .content-zone i {
+            color: var(--gold-accent);
+            margin-right: 10px;
+        }
+
+        /* Right Column Card - Integrated Access Panel Design */
+        .upload-form-card {
+            background-color: var(--light-base) !important; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            padding: 0; 
+            overflow: hidden; 
+        }
+        
+        /* Top Section: Header Bar (Dark Navy) */
+        .access-panel-header {
+            background-color: var(--secondary-dark); 
+            padding: 25px 40px;
+            color: var(--light-base);
+            border-bottom: 4px solid var(--gold-accent); 
+        }
+        .access-panel-header h3 {
+            color: var(--light-base);
+            font-size: 1.5rem;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+
+        /* Upload Form Section (Light Background) */
+        .upload-form-section {
+            padding: 40px;
+        }
+        .upload-form-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary-dark);
+        }
+        .upload-form-section p { 
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            border: 1px solid #DDDDDD !important;
+            border-radius: 4px !important;
+            color: #333333;
+            height: 55px;
+            margin-bottom: 15px;
+            padding-top: 15px;
+        }
+        .form-control::placeholder {
+            color: #AAAAAA;
+        }
+        .btn-primary.w-100 {
+            padding: 15px 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* IMAGE STYLING */
+        .image-collage-container {
+            position: relative;
+            padding: 50px; 
+            /* Added margin-bottom to separate image from text below */
+            margin-bottom: 40px; 
+        }
+        .image-collage-container .img-fluid.rounded.w-75 {
+            position: relative;
+            z-index: 2;
+        }
+        .image-collage-container .w-50 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+            border: 4px solid var(--off-white-bg) !important; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* FOOTER & BACK TO TOP */
+        .back-to-top {
+            background-color: var(--primary) !important;
+            color: var(--light-base) !important;
+            box-shadow: 0 0 15px var(--shadow) !important;
+            border-radius: 8px !important; 
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s" style="background-color: var(--off-white-bg);">
+        <div class="row gx-0 d-none d-lg-flex">
+             </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0"><i class="fas fa-crown me-3"></i>XAI | DATASET UPLOAD</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/AdminHome" class="nav-item nav-link">Home</a>
+                <a href="/Upload" class="nav-item nav-link active">Upload Dataset</a>
+                <a href="/preprocess" class="nav-item nav-link split-line">Preprocess<br>&Split</a>
+                <a href="/xgboost" class="nav-item nav-link">Run Xgboost</a>
+                <a href="/RandomForest" class="nav-item nav-link">Random Forest</a>
+                <a href="/Decision" class="nav-item nav-link">Decision Tree</a>
+                <a href="/comparison" class="nav-item nav-link">Graph</a>
+            </div>
+            <a href="/adminlogin" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    
+                    <div class="d-flex flex-column image-collage-container p-0">
+                        
+                    </div>
+                    
+                    <div class="content-zone">
+                        <h2>IMPORT RAW TELEMETRY DATA</h2>
+                        <p>This section is used to securely upload **Connected Vehicle (CV)** or network telemetry data in CSV format. The integrity of the data is crucial for training the Explainable AI (XAI) models to accurately detect Advanced Persistent Threats (APTs).</p>
+                        
+                        <p class="lead" style="font-size: 1.1rem; color: var(--secondary-dark); font-weight: 500;">
+                            Data Requirements:
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-2">
+                                    <i class="fas fa-file-csv"></i> **File Format:** Must be a **Comma Separated Values (.csv)** file.
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="mb-2">
+                                    <i class="fas fa-exclamation-triangle"></i> **Data Integrity:** Ensure the dataset is cleaned and relevant features are present for classification.
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="mb-0">
+                                    <i class="fas fa-microchip"></i> **Next Step:** Upload is followed by **Preprocess & Split** to prepare the data for training.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="upload-form-card">
+                        
+                        <div class="access-panel-header">
+                            <h3><i class="fas fa-upload me-2"></i> DATASET INGESTION</h3>
+                        </div>
+
+                        <div class="upload-form-section">
+                            <h4 class="mb-2">Initiate File Upload</h4>
+                            
+                            <font color="red">{{msg}}</font>
+                            
+                            <form method="post" action="/UploadAction" enctype="multipart/form-data">
+                                <div class="row g-3">
+                                    <p>SELECT YOUR CSV DATASET</p>
+                                    <div class="col-12">
+                                        <input type="file" class="form-control" name="dataset" accept=".csv" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">UPLOAD DATASET</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<br/><br/><br/><br/><br/><br/>
+    <div class="container-fluid py-4" style="background-color: var(--secondary-dark) !important; color: #AAAAAA; border-top: 5px solid var(--primary);">
+        <div class="container text-center">
+            <small>&copy; XAI Ivory Solutions. Elegant, Professional, Verifiable Security.</small>
+        </div>
+    </div>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+        // Implementing the scroll behavior logic from the template
+        (function ($) {
+            "use strict";
+            
+            new WOW().init();
+
+            // Sticky Navbar
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.sticky-top').addClass('shadow-sm').css('top', '0px');
+                } else {
+                    $('.sticky-top').removeClass('shadow-sm').css('top', '0px'); 
+                }
+            });
+            
+            // Back to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+            
+        })(jQuery);
+    </script>
+</body>
+
+</html>

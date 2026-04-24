@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin Login | XAI Elegance</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="XAI, Connected Vehicles, APT, Cybersecurity, Admin Login, Professional Design" name="keywords">
+    <meta content="Secure Admin Login for the Explainable AI platform." name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> 
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+    <style>
+        /* --- GRACEFUL ELEGANCE STYLES (ADOPTED FOR ADMIN LOGIN) --- */
+
+        /* COLOR PALETTE - Light Base + Deep Navy & Burgundy/Gold Accents */
+        :root {
+            --primary: #9B1C31; /* Rich Burgundy/Maroon Accent */
+            --secondary-dark: #0F1D36; /* Deep Navy/Ink Base */
+            --gold-accent: #B8860B; /* Subtle Gold/Dark Copper for luxury */
+            --light-base: #FFFFFF; /* Pure White elements */
+            --off-white-bg: #FAFAFA; /* Lightest Gray/Off-White Background */
+            --shadow: rgba(155, 28, 49, 0.2); 
+            --dark-card-bg: #1B2C45; /* Slightly lighter navy for contrast area */
+        }
+
+        /* BASE & TYPOGRAPHY */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #555555; 
+            background-color: var(--off-white-bg); 
+            letter-spacing: 0.01em; 
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif; 
+            font-weight: 700;
+            color: var(--secondary-dark); 
+        }
+
+        /* NAVBAR - Deep Navy */
+        .navbar {
+            background-color: var(--secondary-dark) !important; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        .navbar-brand h1 {
+            color: var(--light-base) !important; 
+            font-size: 1.5rem; 
+            padding-left: 20px;
+        }
+        .navbar-brand h1 i {
+            color: var(--gold-accent); 
+            font-size: 1.2em; 
+        }
+        .nav-link {
+            color: #DDDDDD !important; 
+            margin: 0 15px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important; 
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 5px !important;
+        }
+        
+        /* CTA BUTTONS (Register) */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--light-base) !important; 
+            box-shadow: 0 4px 15px var(--shadow); 
+            border-radius: 8px !important; 
+            padding: 16px 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7A1727; 
+            border-color: #7A1727;
+        }
+        
+        /* LOGIN FORM & PAGE STYLING */
+        .container-xxl.py-5 {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+        }
+        
+        /* Left Column Content */
+        .login-content-zone h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary); 
+            font-weight: 900;
+        }
+        .login-content-zone p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .login-content-zone i {
+            color: var(--gold-accent);
+            margin-right: 10px;
+        }
+
+        /* Right Column Card - Integrated Access Panel Design */
+        .login-form-card {
+            background-color: var(--light-base) !important; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+            border: 1px solid #EEEEEE;
+            border-radius: 8px;
+            padding: 0; 
+            overflow: hidden; 
+        }
+        
+        /* Top Section: Dashboard Status Bar (Dark Navy) */
+        .access-panel-header {
+            background-color: var(--secondary-dark); 
+            padding: 25px 40px;
+            color: var(--light-base);
+            border-bottom: 4px solid var(--gold-accent); 
+        }
+        .access-panel-header h3 {
+            color: var(--light-base);
+            font-size: 1.5rem;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+        .status-dot-admin {
+            height: 10px;
+            width: 10px;
+            background-color: #f44336; /* Red for high-privilege access */
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse-admin 1.5s infinite;
+        }
+        @keyframes pulse-admin {
+          0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
+          70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+        }
+
+        /* Login Form Section (Light Background) */
+        .login-form-section {
+            padding: 40px;
+        }
+        .login-form-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary-dark);
+        }
+        
+        .form-control {
+            border: 1px solid #DDDDDD !important;
+            border-radius: 4px !important;
+            color: #333333;
+            height: 55px;
+            margin-bottom: 15px;
+        }
+        .form-control::placeholder {
+            color: #AAAAAA;
+        }
+        .btn-primary.w-100 {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 15px 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* IMAGE STYLING */
+        .image-collage-container {
+            position: relative;
+            padding: 50px; 
+        }
+        .image-collage-container .img-fluid.rounded.w-75 {
+            position: relative;
+            z-index: 2;
+        }
+        .image-collage-container .w-50 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+            border: 4px solid var(--off-white-bg) !important; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* FOOTER & BACK TO TOP */
+        .back-to-top {
+            background-color: var(--primary) !important;
+            color: var(--light-base) !important;
+            box-shadow: 0 0 15px var(--shadow) !important;
+            border-radius: 8px !important; 
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s" style="background-color: var(--off-white-bg);">
+        <div class="row gx-0 d-none d-lg-flex">
+             </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0"><i class="fas fa-crown me-3"></i>XAI | ADMIN LOGIN</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/" class="nav-item nav-link ">Home</a>
+                <a href="/adminlogin" class="nav-item nav-link active">Admin</a>
+                <a href="/userlogin" class="nav-item nav-link">User</a>
+            </div>
+            <a href="/register" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Register<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                
+                <div class="col-lg-7 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="login-content-zone mb-5">
+                        <h2>PRIVILEGED ADMINISTRATION ACCESS</h2>
+                        <p>This panel is reserved for **System Administrators** managing the core integrity of the XAI platform. You have the authority to configure the AI, manage user roles, and access raw threat data against **Advanced Persistent Threats (APTs)**.</p>
+                        
+                        <p class="lead" style="font-size: 1.1rem; color: var(--secondary-dark); font-weight: 500;">
+                            Administrative Privileges Include:
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-user-shield"></i> **User Management:** Create, modify, and revoke user access across the organization.
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-cogs"></i> **Model Configuration:** Retrain or recalibrate the XAI detection models for new threat vectors.
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="mb-0">
+                                    <i class="fas fa-database"></i> **System Audit & Logging:** View comprehensive, unredacted security logs and compliance reports.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex flex-column image-collage-container p-0 mt-5">
+                        <img class="img-fluid rounded w-75 align-self-end" src="{{ url_for('static', filename='img/ddos1.jpg')}}" alt="Threat Detection Interface">
+                        <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="{{ url_for('static', filename='img/about4.jpg')}}" alt="Cybersecurity Code" style="margin-top: -25%;">
+                    </div>
+                </div>
+
+                <div class="col-lg-5 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="login-form-card">
+                        
+                        <div class="access-panel-header d-flex justify-content-between align-items-center">
+                            <h3><i class="fas fa-user-lock me-2"></i> ADMIN ACCESS CONTROL</h3>
+                            <div class="d-flex align-items-center">
+                                <span class="status-dot-admin"></span>
+                                <small>ACCESS LEVEL: HIGH</small>
+                            </div>
+                        </div>
+
+                        <div class="login-form-section">
+                            <h4 class="mb-2">Administrator Authentication</h4>
+                            <p class="text-center mb-4" style="font-size: 0.95rem; color: #777;">Enter your credentials for full system privileges.</p>
+                            
+                            <font color="red">{{msg}}</font>
+                            
+                            <form method="post" action="/AdminAction">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" name="username" placeholder="Admin Username">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <input type="password" class="form-control" name="password" placeholder="Admin Password">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">ADMIN LOGIN</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid py-4" style="background-color: var(--secondary-dark) !important; color: #AAAAAA; border-top: 5px solid var(--primary);">
+        <div class="container text-center">
+            <small>&copy; XAI Ivory Solutions. Elegant, Professional, Verifiable Security.</small>
+        </div>
+    </div>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+        // Re-implementing the scroll behavior from the source style
+        (function ($) {
+            "use strict";
+            
+            new WOW().init();
+
+            // Sticky Navbar
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.sticky-top').addClass('shadow-sm').css('top', '0px');
+                } else {
+                    $('.sticky-top').removeClass('shadow-sm').css('top', '0px'); 
+                }
+            });
+            
+            // Back to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+            
+        })(jQuery);
+    </script>
+</body>
+
+</html>

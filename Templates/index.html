@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Explainable AI for Enhanced Security & Privacy in Connected Vehicles</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="XAI, Connected Vehicles, APT, Cybersecurity, Privacy, Data Trust, Professional Design" name="keywords">
+    <meta content="A sophisticated, data-driven platform explaining the role of Explainable AI (XAI) in mitigating Advanced Persistent Threats (APTs) in autonomous systems." name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> 
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+    <style>
+        /* --- NEW CSS STYLE: GRACEFUL ELEGANCE (CREAM/WHITE, DEEP NAVY, & BURGUNDY/GOLD) --- */
+
+        /* BASE & TYPOGRAPHY - Elegant, Serif-focused, Refined Contrast */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #555555; /* Soft dark gray text */
+            background-color: #FAFAFA; /* Lightest Gray/Off-White Background */
+            letter-spacing: 0.01em; 
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif; /* High-end serif for headers */
+            font-weight: 700;
+            color: #0F1D36; /* Deep, Rich Navy Blue headings */
+        }
+        p.lead {
+            font-weight: 300;
+            font-size: 1.3rem;
+            color: #666666; 
+            line-height: 1.75;
+        }
+
+        /* COLOR PALETTE - Light Base + Deep Navy & Burgundy/Gold Accents */
+        :root {
+            --primary: #9B1C31; /* Rich Burgundy/Maroon Accent */
+            --secondary-dark: #0F1D36; /* Deep Navy/Ink Base */
+            --gold-accent: #B8860B; /* Subtle Gold/Dark Copper for luxury */
+            --light-base: #FFFFFF; /* Pure White elements */
+            --shadow: rgba(155, 28, 49, 0.2); 
+            --card-background: #FFFFFF;
+        }
+
+        /* NAVBAR - Deep Navy */
+        .navbar {
+            background-color: var(--secondary-dark) !important; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        .navbar-brand h1 {
+            color: var(--light-base) !important; 
+        }
+        .navbar-brand h1 i {
+            color: var(--gold-accent); /* Gold icon */
+            font-size: 1.2em; 
+        }
+        .nav-link {
+            color: #DDDDDD !important; 
+            margin: 0 15px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important; /* Burgundy accent */
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 5px !important;
+        }
+
+        /* HERO SECTION - Clean, High Contrast */
+        .header {
+            padding-top: 160px;
+            padding-bottom: 160px;
+            background-color: #FFFFFF; /* White background */
+            text-align: center; 
+            border-bottom: 3px solid #EEEEEE;
+        }
+        .header h1.display-4 {
+            color: var(--secondary-dark);
+            font-size: 4.8rem;
+        }
+        .header h1 span {
+            color: var(--primary); /* Burgundy for key phrase */
+            font-weight: 900;
+        }
+
+        /* CTA BUTTONS - Rich and Solid */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--light-base) !important; 
+            box-shadow: 0 4px 15px var(--shadow); 
+            border-radius: 8px !important; /* Softly rounded */
+            padding: 16px 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7A1727; /* Darker Burgundy */
+            border-color: #7A1727;
+            box-shadow: 0 6px 20px rgba(155, 28, 49, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-outline-dark {
+            border: 2px solid var(--secondary-dark); 
+            color: var(--secondary-dark);
+            border-radius: 8px !important;
+            padding: 16px 50px;
+        }
+        .btn-outline-dark:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: #FEEFEF;
+        }
+        
+        /* FEATURE SECTION - Floating Cards on a Light Background */
+        .feature-section {
+            background-color: #FAFAFA; /* Light Gray background */
+            padding: 120px 0;
+        }
+        .feature-item-float {
+            background-color: var(--card-background); /* Pure white cards */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--primary); /* Burgundy line */
+        }
+        .feature-item-float:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            border-left-color: var(--gold-accent); /* Gold line on hover */
+        }
+        .feature-item-float h4 {
+            color: var(--secondary-dark);
+        }
+        .feature-item-float i {
+            color: var(--gold-accent); /* Gold/Copper icons */
+            font-size: 3.0rem; /* Slightly larger for elegance */
+        }
+
+        /* ABOUT SECTION - Structured and Paired with Image */
+        .about-section {
+            background-color: var(--light-base); 
+            padding: 120px 0;
+            border-top: 1px solid #E0E0E0;
+        }
+        .section-tag {
+            color: var(--gold-accent); /* Gold tag */
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8rem;
+        }
+        .detail-point {
+            border-left: 3px solid var(--primary); /* Burgundy vertical accent */
+        }
+        .detail-point h5 {
+            color: var(--secondary-dark);
+        }
+        .detail-point i {
+            color: var(--gold-accent) !important; /* Gold icons */
+        }
+        .detail-point p {
+            color: #666666 !important;
+        }
+        .about-image-container {
+            border: 10px solid #F0F0F0; /* Lighter border */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* FOOTER & BACK TO TOP */
+        .container-fluid.py-4 {
+            background-color: var(--secondary-dark) !important; /* Deep Navy Footer */
+            color: #AAAAAA !important;
+            border-top: 5px solid var(--primary); /* Burgundy top border */
+        }
+        .back-to-top {
+            background-color: var(--primary) !important;
+            color: var(--light-base) !important;
+            box-shadow: 0 0 15px var(--shadow) !important;
+            border-radius: 8px !important; 
+        }
+        .back-to-top:hover {
+            background-color: #7A1727 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
+        </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0"><i class="fas fa-crown me-3"></i> Connected Vehicles Against Advanced Persistent Threats</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="#features" class="nav-item nav-link">Insights</a>
+                <a href="#about" class="nav-item nav-link">Analysis</a>
+                <a href="/userlogin" class="nav-item nav-link">User </a>
+                <a href="/adminlogin" class="nav-item nav-link">ADMIN</a>
+            </div>
+            <a href="/register" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
+                <i class="fas fa-search me-2"></i>SIGN UP
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid header p-0 mb-0">
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-12 p-5">
+                    <h1 class="display-4 mb-4">
+                        The Authority in <span>Enhanced Security And Privacy In</span> Connected Vehicles Against Advanced Persistent Threats
+                    </h1>
+                    <p class="mb-4 lead">
+                        We offer auditable security solutions against **Advanced Persistent Threats (APTs)** by integrating XAI with mature, reliable design principles.
+                    </p>
+                    <a href="#features" class="btn btn-primary py-3 px-5 wow fadeInUp" data-wow-delay="0.6s">
+                        <i class="fas fa-arrow-down me-2"></i>EXPLORE SOLUTIONS
+                    </a>
+                    <a href="/register" class="btn btn-outline-dark py-3 px-5 ms-3 wow fadeInUp" data-wow-delay="0.8s">
+                        <i class="fas fa-book-open me-2"></i>VIEW WHITEPAPER
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid feature-section wow fadeInUp" data-wow-delay="0.1s" id="features">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 800px;">
+                <p class="section-tag">CORE INSIGHTS</p>
+                <h2 class="mt-2" style="color: var(--secondary-dark);">Focused Expertise in XAI Implementation</h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="feature-item-float wow fadeInUp" data-wow-delay="0.2s">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h4>Auditable Decision Logs</h4>
+                        <p class="mb-0">Provides feature importance for every security decision, turning black-box AI into a fully transparent and auditable system.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-item-float wow fadeInUp" data-wow-delay="0.4s">
+                        <i class="fas fa-lock-open"></i>
+                        <h4>Proactive APT Detection</h4>
+                        <p class="mb-0">Our behavioral engine detects subtle, multi-stage attack patterns unique to Advanced Persistent Threats in automotive environments.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-item-float wow fadeInUp" data-wow-delay="0.6s">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Performance Validation</h4>
+                        <p class="mb-0">Optimized XAI inference engine guarantees sub-millisecond decision times for deployment directly onto automotive ECUs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-item-float wow fadeInUp" data-wow-delay="0.8s">
+                        <i class="fas fa-balance-scale"></i>
+                        <h4>Regulatory Assurance</h4>
+                        <p class="mb-0">Full compliance with ISO/SAE 21434 standards, maintaining an immutable ledger of all security actions for defensibility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid about-section wow fadeInUp" id="about">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <p class="section-tag">METHODOLOGY</p>
+                    <h2 class="mb-4" style="color: var(--secondary-dark);">Ensuring Trust with Data Integrity</h2>
+                    <p class="mb-4 lead" style="font-size: 1.1rem; color: #666666;">
+                        A robust solution starts with data integrity. Our framework verifies every input to ensure model trust and system stability.
+                    </p>
+                    <div class="detail-point">
+                        <h5 style="color: var(--secondary-dark);"><i class="fas fa-map-pin me-3"></i>Authenticated Data Sources</h5>
+                        <p class="m-0">We use verified CAN bus and V2X logs, preventing data poisoning and maintaining the fidelity of the XAI model inputs.</p>
+                    </div>
+                    <div class="detail-point">
+                        <h5 style="color: var(--secondary-dark);"><i class="fas fa-database me-3"></i>Immutable Audit Trail</h5>
+                        <p class="m-0">Automated logging of every XAI action provides an immediate and comprehensive forensic analysis capability post-incident.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="about-image-container">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/about3.jpg')}}" alt="Scientific visualization of security data analysis." style="width: 100%; border-radius: 4px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-4" style="background-color: var(--secondary-dark); color: #AAAAAA;">
+        <div class="container text-center">
+            <small>&copy; XAI Ivory Solutions. Elegant, Professional, Verifiable Security.</small>
+        </div>
+    </div>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="border-radius: 8px !important;"><i class="bi bi-arrow-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        (function ($) {
+            "use strict";
+            
+            new WOW().init();
+
+            // Sticky Navbar
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.sticky-top').addClass('shadow-sm').css('top', '0px');
+                } else {
+                     $('.sticky-top').removeClass('shadow-sm').css('top', '-100px');
+                }
+            });
+            
+            // Back to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+            
+        })(jQuery);
+    </script>
+</body>
+
+</html>

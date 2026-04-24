@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Prediction Result | XAI Security</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Enhanced Security And Privacy In Connected Vehicles Against Advanced Persistent Threats" name="keywords">
+    <meta content="APT Attack Prediction Results" name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    
+    <style>
+        /* --- XAI ELEGANCE STYLES (PREDICTION PAGE) --- */
+
+        /* COLOR PALETTE */
+        :root {
+            --primary: #9B1C31; /* Rich Burgundy/Maroon Accent */
+            --secondary-dark: #0F1D36; /* Deep Navy/Ink Base */
+            --gold-accent: #B8860B; /* Subtle Gold/Dark Copper for luxury */
+            --light-base: #FFFFFF; /* Pure White elements */
+            --off-white-bg: #FAFAFA; /* Lightest Gray/Off-White Background */
+            --shadow: rgba(155, 28, 49, 0.2); 
+            --safe: #38c172; /* Green for safe/low-risk */
+            --danger: #e3342f; /* Red for detected attack */
+            --warning: #f6993f; /* Orange for warning/probing */
+        }
+
+        /* BASE & TYPOGRAPHY */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #555555; 
+            background-color: var(--off-white-bg); /* Clean background */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif; 
+            font-weight: 700;
+            color: var(--secondary-dark); 
+        }
+        
+        /* NAVBAR - Deep Navy */
+        .navbar {
+            background-color: var(--secondary-dark) !important; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        .navbar-brand h1 {
+            color: var(--light-base) !important; 
+            font-size: 1.4rem !important; 
+            font-weight: 900 !important;
+            padding-left: 20px;
+        }
+        .navbar-brand h1 i {
+            color: var(--gold-accent); 
+            font-size: 1.2em; 
+        }
+        .navbar-brand .m-0.text-primary {
+            color: var(--light-base) !important;
+            font-size: 1.4rem !important;
+        }
+        .nav-link {
+            color: #DDDDDD !important; 
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-item .nav-link.active {
+            color: var(--primary) !important; 
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 5px !important;
+        }
+
+        /* CTA BUTTONS (Logout) */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--light-base) !important; 
+            box-shadow: 0 4px 15px var(--shadow); 
+            border-radius: 8px !important; 
+            padding: 16px 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7A1727; 
+            border-color: #7A1727;
+        }
+
+        /* PAGE HEADER (Hero/Breadcrumb Section) */
+        .page-header {
+            background: linear-gradient(rgba(15, 29, 54, .8), rgba(15, 29, 54, .8)), url({{ url_for('static', filename='img/carousel-1.jpg') }}) center center no-repeat;
+            background-size: cover;
+            padding-top: 100px !important; 
+            padding-bottom: 100px !important;
+        }
+        .page-header .display-3 {
+            color: var(--light-base) !important;
+            font-size: 3.5rem;
+        }
+        .breadcrumb-item a,
+        .breadcrumb-item.text-primary.active {
+            color: var(--gold-accent) !important; 
+            font-weight: 700;
+        }
+        .breadcrumb-item::before {
+            color: var(--light-base) !important; 
+        }
+
+        /* PREDICTION RESULT STYLES */
+        .text-center.mx-auto {
+            padding: 40px;
+            border-radius: 15px;
+            background-color: var(--light-base);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        .text-center.mx-auto h1 {
+            color: var(--secondary-dark) !important;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .text-center.mx-auto hr {
+            border-top: 3px solid var(--primary);
+            width: 80px;
+            opacity: 1;
+            margin-bottom: 30px;
+        }
+        .text-center.mx-auto h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+        .text-center.mx-auto .text-danger {
+            color: var(--danger) !important;
+            background-color: rgba(227, 52, 47, 0.1);
+            border: 2px solid var(--danger);
+        }
+        .text-center.mx-auto .text-warning {
+            color: var(--warning) !important;
+            background-color: rgba(246, 153, 63, 0.1);
+            border: 2px solid var(--warning);
+        }
+        .text-center.mx-auto .text-secondary {
+            color: var(--secondary-dark) !important;
+            background-color: rgba(15, 29, 54, 0.05);
+            border: 2px solid var(--secondary-dark);
+        }
+
+        /* SUGGESTIONS CARD */
+        .card.shadow-lg.border-0.mt-4.bg-light {
+            border-radius: 10px !important;
+            border: 1px solid #EEEEEE !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+            background-color: #F8F9FA !important;
+        }
+        .card-body h5.text-primary {
+            color: var(--primary) !important;
+            border-bottom: 2px solid var(--gold-accent);
+            padding-bottom: 5px;
+        }
+        .list-unstyled li {
+            text-align: left;
+            padding: 8px 0;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        .list-unstyled li b {
+            color: var(--secondary-dark);
+        }
+
+
+        /* Back to Top */
+        .back-to-top {
+            background-color: var(--primary) !important;
+            color: var(--light-base) !important;
+            box-shadow: 0 0 15px var(--shadow) !important;
+            border-radius: 8px !important; 
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow" style="width: 3rem; height: 3rem; background-color: var(--primary);" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 d-none d-lg-flex">
+            <div class="col-lg-7 px-5 text-start"></div>
+            <div class="col-lg-5 px-5 text-end"></div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0"><i class="fas fa-car-side me-3" style="color: var(--gold-accent);"></i>XAI | SECURITY RESULTS</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/UserHome" class="nav-item nav-link">Home</a>
+                <a href="/Detect" class="nav-item nav-link active">Detect APT Attack</a>
+            </div>
+            <a href="/userlogin" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Detection Result</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb text-uppercase mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">User</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Prediction</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="fw-bold">🔍 Predicted Result</h1>
+            <hr class="w-25 mx-auto">
+            
+            {% if result == 0 %}
+                <h3 class="fw-bold text-danger"><i class="fas fa-bolt me-2"></i>⚠️ APT Attack Detected!</h3>
+                <p class="text-muted">This attack floods your network with malicious push-ack packets. 🚨</p>
+
+                <div class="card shadow-lg border-0 mt-4 bg-light">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-3">💡 Suggested Actions </h5>
+                        <ol class="list-unstyled">
+                            <li>🛡️ <b>Enable firewall rules</b> to block suspicious PSH-ACK packets.</li>
+                            <li>📊 <b>Use IDS/IPS</b> (Intrusion Detection & Prevention Systems) to monitor abnormal traffic.</li>
+                            <li>🚦 <b>Limit incoming traffic rate</b> using rate limiting or throttling.</li>
+                            <li>🔗 <b>Block IP ranges</b> that repeatedly send malicious packets.</li>
+                            <li>☁️ <b>Consider cloud-based DDoS protection</b> for high traffic scenarios.</li>
+                        </ol>
+                    </div>
+                </div>
+
+            {% elif result == 1 %}
+                <h3 class="fw-bold text-warning"><i class="fas fa-bullseye me-2"></i>🟡 Begin OR NO APT Attack Detected</h3>
+                <p class="text-muted">This is an early-stage probing attack or normal benign traffic. 🕵️</p>
+
+                <div class="card shadow-lg border-0 mt-4 bg-light">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-3">💡 Suggested Actions </h5>
+                        <ol class="list-unstyled">
+                            <li>🔍 <b>Activate anomaly detection</b> to spot unusual patterns early.</li>
+                            <li>🪤 <b>Deploy honeypots</b> to mislead attackers and gather intelligence.</li>
+                            <li>🚫 <b>Block repetitive requests</b> with strict firewall filtering rules.</li>
+                            <li>🔄 <b>Update signatures</b> of security tools to detect emerging patterns.</li>
+                        </ol>
+                    </div>
+                </div>
+
+            {% elif result == 2 %}
+                <h3 class="fw-bold text-danger"><i class="fas fa-ban me-2"></i>🔴 APT Attack Detected (ACK Flood)</h3>
+                <p class="text-muted">This attack overwhelms your server with ACK floods. 💥</p>
+
+                <div class="card shadow-lg border-0 mt-4 bg-light">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-3">💡 Suggested Actions </h5>
+                        <ol class="list-unstyled">
+                            <li>🛑 <b>Enable SYN/ACK flood protection</b> in your firewall settings.</li>
+                            <li>📉 <b>Rate-limit ACK packets</b> at the router level.</li>
+                            <li>📡 <b>Use load balancing</b> to distribute traffic across servers.</li>
+                            <li>📜 <b>Monitor server logs</b> for ACK spikes and anomalies.</li>
+                            <li>🌐 <b>Deploy CDN services</b> to absorb attack traffic.</li>
+                            <li>👩‍💻 <b>Notify admins immediately</b> for manual intervention.</li>
+                        </ol>
+                    </div>
+                </div>
+
+            {% else %}
+                <h3 class="fw-bold text-secondary"><i class="fas fa-question-circle me-2"></i>❓ Unknown Result</h3>
+                <p class="text-muted">The system could not classify this pattern. Further inspection needed. 🔎</p>
+
+                <div class="card shadow-lg border-0 mt-4 bg-light">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-3">💡 Suggested Actions</h5>
+                        <ol class="list-unstyled">
+                            <li>🔬 <b>Perform deep packet inspection</b> for hidden anomalies.</li>
+                            <li>🧠 <b>Update machine learning model</b> with more training data.</li>
+                            <li>📢 <b>Alert security team</b> for manual review and action.</li>
+                        </ol>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
